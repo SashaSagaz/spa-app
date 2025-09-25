@@ -12,6 +12,7 @@ ChartJS.register(
   PointElement
 );
 
+// Типизируем пропсы для labels и values
 const props = defineProps<{
   labels: string[]; // Массив дат (или других меток)
   values: number[]; // Массив сумм прихода (total_price) или количеств (quantity)
@@ -52,10 +53,7 @@ const props = defineProps<{
           },
           y: {
             title: { display: true, text: 'Сумма заказов' },
-            ticks: { 
-              min: 0 // Используем min вместо beginAtZero
-            },
-            grid: { borderColor: '#ddd' }
+            grid: { color: '#ddd' }
           }
         }
       }"

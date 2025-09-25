@@ -93,7 +93,28 @@ import { ref, onMounted, computed } from 'vue';
 import { getSales } from '../services/api';
 import SalesChart from '../components/SalesChart.vue';
 
-const sales = ref([]);
+
+// Определение интерфейса для продажи (sale)
+interface Sale {
+  sale_id: number;
+  date: string;
+  warehouse_name: string;
+  total_price: string;
+  price_with_disc: string;
+  discount_percent: number;
+  nm_id: number;
+}
+
+// Типизация для данных
+const sales = ref<Sale[]>([]); // sales теперь массив объектов типа Sale
+// Поиск по складу или товару
+const filteredSales = computed(() => {
+  return sales.value.filter(sale => {
+    const query = searchQuery.value.toLowerCase();
+    return sale.warehouse_name.toLowerCase().includes(query) || sale.nm_id.toString().includes(query);
+  });
+});
+
 const loading = ref(true);
 const page = ref(1);
 const totalPages = ref(1);
@@ -124,14 +145,6 @@ async function fetchSales(p = 1) {
 function applyFilter() {
   fetchSales(1);
 }
-
-// Поиск по складу или товару
-const filteredSales = computed(() => {
-  return sales.value.filter(sale => {
-    const query = searchQuery.value.toLowerCase();
-    return sale.warehouse_name.toLowerCase().includes(query) || sale.nm_id.toString().includes(query);
-  });
-});
 
 onMounted(() => fetchSales());
 </script>

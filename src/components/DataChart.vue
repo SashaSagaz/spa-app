@@ -52,8 +52,7 @@ const props = defineProps<{
           },
           y: { 
             title: { display: true, text: 'Количество' },
-            ticks: { beginAtZero: true },
-            grid: { borderColor: '#ddd' }
+            grid: { color: '#ddd' }
           }
         }
       }"

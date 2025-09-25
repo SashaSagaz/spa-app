@@ -5,13 +5,13 @@ import { Chart, registerables } from "chart.js";
 // Регистрируем компоненты Chart.js
 Chart.register(...registerables);
 
-// Получаем данные через пропсы
-const props = defineProps({
-  orders: {
-    type: Array,
-    required: true
-  }
-});
+// Типизируем пропсы для orders
+const props = defineProps<{
+  orders: Array<{
+    date: string;
+    total_price: string;
+  }>;
+}>();
 
 let chartInstance: any = null;
 
@@ -38,8 +38,7 @@ onMounted(() => {
         },
         y: {
           title: { display: true, text: 'Сумма заказов' },
-          ticks: { min: 0 },
-          grid: { borderColor: '#ddd' }
+          grid: { color: '#ddd' }
         }
       }
     };

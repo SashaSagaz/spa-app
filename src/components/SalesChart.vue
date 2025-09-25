@@ -12,10 +12,11 @@ ChartJS.register(
   PointElement
 );
 
+// Типизируем пропсы для labels, values и discounts
 const props = defineProps<{
-  labels: string[];
-  values: number[];
-  discounts: number[];
+  labels: string[];    // Массив строк (например, метки времени или даты)
+  values: number[];    // Массив числовых значений для графика
+  discounts: number[]; // Массив числовых значений скидок
 }>();
 </script>
 
@@ -67,13 +68,11 @@ const props = defineProps<{
           },
           y1: {
             title: { display: true, text: 'Цена с учетом скидки (₽)' },
-            ticks: { beginAtZero: true },
-            grid: { borderColor: '#ddd' }
+            grid: { color: '#ddd' }
           },
           y2: {
             title: { display: true, text: 'Скидка (%)' },
-            ticks: { beginAtZero: true },
-            grid: { borderColor: '#ddd' },
+            grid: { color: '#ddd' },
             position: 'right'
           }
         }
